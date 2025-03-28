@@ -1,6 +1,6 @@
 # Employment Analytics Dashboard
 
-📊 A Power BI dashboard for analyzing employment trends, workforce distribution, and key performance metrics.
+📊 A Web Application integrating with Power BI dashboard for analyzing employment trends, workforce distribution, and key performance metrics.
 
 ## 🚀 About the Project
 This project is designed to provide insights into employment data, helping businesses and analysts track workforce trends, hiring patterns, and other key employment metrics using Power BI.
