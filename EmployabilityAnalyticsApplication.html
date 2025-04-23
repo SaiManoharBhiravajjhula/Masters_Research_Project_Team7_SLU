@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employability Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333333; /* Dark grey for header */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-selector {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .page-selector-button {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000000;
+            background-color: #f0f0f0; /* Light grey background */
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s ease;
+            border: none;
+        }
+
+        .page-selector-button:hover {
+            background-color: #dddddd; /* Darker grey on hover */
+            transform: scale(1.05);
+        }
+
+        .page-selector-button.active {
+            background-color: #4CAF50; /* Green when active */
+            color: white;
+        }
+
+        .btn-icon {
+            font-size: 36px;
+            margin-right: 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            background-color: #f0f0f0; /* Light grey background for buttons */
+            color: black;
+            cursor: pointer;
+            text-align: center;
+            width: 250px;
+            height: 120px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #dddddd;
+            transform: translateY(-4px);
+        }
+
+        .page {
+            display: none;
+            padding: 30px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        footer {
+            background-color: #333333; /* Dark grey footer */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+.submit-btn:hover {
+        background-color: #45a049; /* Slightly darker green on hover */
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Employability Analytics Platform
+    </div>
+  <div class="page-selector">
+        <button class="page-selector-button active" onclick="showPage(1)" id="btn1">Job Market Trends</button>
+        <button class="page-selector-button" onclick="showPage(2)" id="btn2">Salary & Skills Benchmarking</button>
+        <button class="page-selector-button" onclick="showPage(3)" id="btn3">Application Tracking</button>
+    </div>
+
+    <!-- Page 1: Job Market Trends -->
+    <div id="page1" class="page active">
+        <h2 class="text-center text-xl font-semibold mb-6 text-red-600">📊 Job Market Overview & Trends</h2>
+        <div class="page-container">
+            <div class="btn" onclick="openModal('modal1')">
+                <i class="fas fa-map-marker-alt btn-icon"></i>
+                <span class="btn-text">US Heatmap</span>
+            </div>
+            <div class="btn" onclick="openModal('modal2')">
+                <i class="fas fa-chart-bar btn-icon"></i>
+                <span class="btn-text">Industry Jobs</span>
+            </div>
+            <div class="btn" onclick="openModal('modal3')">
+                <i class="fas fa-chart-line btn-icon"></i>
+                <span class="btn-text">Job Post Trends</span>
+            </div>
+            <div class="btn" onclick="openModal('modal4')">
+                <i class="fas fa-briefcase btn-icon"></i>
+                <span class="btn-text">Industry Overview</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: Salary & Skills Benchmarking -->
+    <div id="page2" class="page">
+        <h2 class="text-center text-xl font-semibold mb-6 text-red-600">💼 Salary & Skill Benchmarking</h2>
+        <div class="page-container">
+            <div class="btn" onclick="openModal('modal5')">
+                <i class="fas fa-chart-bar btn-icon"></i>
+                <span class="btn-text">Salary by Job</span>
+            </div>
+            <div class="btn" onclick="openModal('modal6')">
+                <i class="fas fa-chart-line btn-icon"></i>
+                <span class="btn-text">Trends by Experience</span>
+            </div>
+            <div class="btn" onclick="openModal('modal7')">
+                <i class="fas fa-cogs btn-icon"></i>
+                <span class="btn-text">Skills In Demand</span>
+            </div>
+            <div class="btn" onclick="openModal('modal8')">
+                <i class="fas fa-map btn-icon"></i>
+                <span class="btn-text">Salary by Region</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Application Tracking -->
+    <div id="page3" class="page">
+        <h2 class="text-center text-xl font-semibold mb-6 text-red-600">📑 Application Tracking & Insights</h2>
+        <div class="page-container">
+            <div class="btn" onclick="openModal('modal9')">
+                <i class="fas fa-clipboard-check btn-icon"></i>
+                <span class="btn-text">Application Status</span>
+            </div>
+            <div class="btn" onclick="openModal('modal10')">
+                <i class="fas fa-clock btn-icon"></i>
+                <span class="btn-text">Response Time</span>
+            </div>
+            <div class="btn" onclick="openModal('modal11')">
+                <i class="fas fa-paper-plane btn-icon"></i>
+                <span class="btn-text">Applied Jobs</span>
+            </div>
+            <div class="btn" onclick="openModal('modal12')">
+                <i class="fas fa-list btn-icon"></i>
+                <span class="btn-text">Experience Level vs. Job Offers</span>
+            </div>
+        </div>
+    </div>
+
+   <!-- Modal 1 (Power BI) -->
+<div id="modal1" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+  <div class="bg-white p-4 rounded shadow-lg relative w-[90%] max-w-6xl">
+    <button onclick="closeModal('modal1')" class="absolute top-2 right-2 bg-red-500 text-white px-4 py-1 rounded">
+      Close
+    </button>
+<iframe  class="w-full h-[500px] mt-4" title="MRP_Map" src="https://app.powerbi.com/reportEmbed?reportId=b0fd2958-ba84-4b6f-94e6-f3c890fbfc41&autoAuth=true&ctid=cbcde4cc-b8c7-404c-9582-a15d41c8e524" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+</div>
+
+<!-- Example of Modal 2 -->
+<div id="modal2" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+  <div class="bg-white p-4 rounded shadow-lg relative w-[90%] max-w-5xl">
+    <button onclick="closeModal('modal2')" class="absolute top-2 right-2 bg-red-500 text-white px-4 py-1 rounded">
+      Close
+    </button>
+    <iframe class="w-full h-[500px] mt-4" title="Trending_Skills_Visualization" src="https://app.powerbi.com/reportEmbed?reportId=06eaca44-d0ad-4043-9d8c-8e1a5eff9f9c&autoAuth=true&ctid=cbcde4cc-b8c7-404c-9582-a15d41c8e524" frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+</div>
+
+
+    <!-- Example of Modal 3 -->
+<div id="modal3" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+  <div class="bg-white p-4 rounded shadow-lg relative w-[90%] max-w-5xl">
+    <button onclick="closeModal('modal3')" class="absolute top-2 right-2 bg-red-500 text-white px-4 py-1 rounded">
+      Close
+    </button>
+   <iframe class="w-full h-[500px] mt-4" title="Jobs_by_PostedDate_and_Skills" src="https://app.powerbi.com/reportEmbed?reportId=502204da-2e7c-4f30-86ea-22dad9197b73&autoAuth=true&ctid=cbcde4cc-b8c7-404c-9582-a15d41c8e524" frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+</div>
+    </div>
+
+
+    <div id="modal4" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+  <div class="bg-white p-4 rounded shadow-lg relative w-[90%] max-w-5xl">
+<button onclick="closeModal('modal4')" class="absolute top-2 right-2 bg-red-500 text-white px-4 py-1 rounded">
+      Close
+    </button><iframe class="w-full h-[500px] mt-4" title="Applications_Overview" src="https://app.powerbi.com/reportEmbed?reportId=b4ab3b25-5677-41fa-a5a7-f45d597470a7&autoAuth=true&ctid=cbcde4cc-b8c7-404c-9582-a15d41c8e524" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+    <div id="modal5" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4DZzlNzYUmqcRoFpA18XcrLt7KqD9Vr0UMg&s" alt="Salary by Job">
+            <button onclick="closeModal('modal5')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal6" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmza2fEu29OqZT4HTuZksackcG9F36CKqE_Q&s" alt="Trends by Experience">
+            <button onclick="closeModal('modal6')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal7" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1i2l_ih4srqeerXhVh2r2UM-YrVGofVXquQ&s" alt="Skills In Demand">
+            <button onclick="closeModal('modal7')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal8" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Vb0CNDEpVLL54RR8rggza5rpTGEi7EBCHw&s" alt="Salary by Region">
+            <button onclick="closeModal('modal8')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal9" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*gHs4DfZC3kqShf_I9d6Xhg.png" alt="Application Status">
+            <button onclick="closeModal('modal9')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal10" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://www.everviz.com/wp-content/uploads/2021/04/worlds-10-largest-compan.png" alt="Response Time">
+            <button onclick="closeModal('modal10')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal11" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://preview.redd.it/jobs-on-linkedin-v0-7ge9qizbw78d1.jpeg?width=640&crop=smart&auto=webp&s=e88636c4f0a7b7512ad4435ae8ef6807093fc0fd" alt="Applied Jobs">
+            <button onclick="closeModal('modal11')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+    <div id="modal12" class="modal">
+        <div class="modal-content bg-white p-4 rounded">
+            <img src="https://www.icaew.com/-/media/corporate/images/technical/technology/excel-community/excel-community-articles/general-articles/2022/9/cluster-stack/002.ashx?mw=1600" alt="Experience Level vs. Job Offers">
+            <button onclick="closeModal('modal12')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Employability Analytics. All Rights Reserved.
+    </footer>
+
+   <script>
+  function showPage(pageNum) {
+    const pages = document.querySelectorAll('.page');
+    const buttons = document.querySelectorAll('.page-selector-button');
+
+    pages.forEach((page, index) => {
+      if (index === pageNum - 1) {
+        page.classList.add('active');
+        buttons[index].classList.add('active');
+      } else {
+        page.classList.remove('active');
+        buttons[index].classList.remove('active');
+      }
+    });
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+    document.getElementById(id).classList.add('flex'); // Ensures it shows as flex
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('flex');
+    document.getElementById(id).classList.add('hidden');
+  }
+</script>
+
+</body>
+</html>

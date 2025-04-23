@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Employability Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Login Form Container -->
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h2>
+        
+        <form id="login-form">
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+                <input type="text" id="username" name="username" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" id="password" name="password" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center justify-between mb-4">
+                <label class="flex items-center text-sm text-gray-600">
+                    <input type="checkbox" class="form-checkbox text-blue-600 mr-2">
+                    Remember me
+                </label>
+                <a href="#" class="text-sm text-blue-500 hover:underline">Forgot password?</a>
+            </div>
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+                Login
+            </button>
+        </form>
+
+        <p class="mt-4 text-sm text-center text-gray-600">
+            Don't have an account?
+            <a href="#" class="text-blue-500 hover:underline">Sign up</a>
+        </p>
+    </div>
+
+    <!-- JavaScript for login validation and redirection -->
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Static credentials
+            const validUsername = "admin";
+            const validPassword = "1234";
+
+            if (username === validUsername && password === validPassword) {
+                // Redirect to dashboard page
+                window.location.href = "EmployabilityAnalyticsApplication.html";
+            } else {
+                alert("Invalid username or password.");
+            }
+        });
+    </script>
+
+</body>
+</html>
